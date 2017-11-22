@@ -20,8 +20,8 @@ class App extends Component {
       <div>
         <div className="header"><h2>Todo List</h2></div>
 
-        <Table todoList={this.state.todoList} stateUpdate={this.stateUpdate}/>
-        <Add todoList={this.state.todoList} stateUpdate={this.stateUpdate}/>
+        <Table todoList={this.state.todoList} deleteTodo={this.deleteTodo}/>
+        <Add todoList={this.state.todoList} addTodo={this.addTodo}/>
 
       </div>
     );
@@ -31,7 +31,17 @@ class App extends Component {
   function that receives new state and update current state.
   This function is passed to every component that has methods which will change the state
   */
-  stateUpdate = (newTodo) => {
+
+ deleteTodo = (newState) => {
+   // this.props.todoList.splice(key, 1);
+   // this.props.stateUpdate(this.props.todoList);
+   this.setState({
+     todoList: newState
+   });
+
+ }
+
+  addTodo = (newTodo) => {
     this.setState({
       todoList: [...this.state.todoList, newTodo]
     });

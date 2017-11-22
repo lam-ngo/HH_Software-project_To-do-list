@@ -21,7 +21,7 @@ class Table extends Component {
 
   deleteTodo = (key) => {
     this.props.todoList.splice(key, 1);
-    this.props.stateUpdate(this.props.todoList);
+    this.props.deleteTodo(this.props.todoList);
   }
 }
 
