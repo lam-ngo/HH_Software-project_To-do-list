@@ -15,25 +15,23 @@ class Add extends Component {
   render() {
     return (
       <div className="container">
-        <form onSubmit={this.addTodo}>
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th></th>
-              </tr>
-            </thead>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+          </thead>
 
-            <tbody>
-              <tr>
-                <td><input type="text" name="date" placeholder="dd.MM.yyyy" onChange={this.inputChanged} ref="newDate" /></td>
-                <td><input type="text" name="description" placeholder="Cannot be empty" onChange={this.inputChanged} ref="newDescription" /></td>
-                <td><input type="submit" value="Add new todo" className="button"/></td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
+          <tbody>
+            <tr>
+              <td><input type="date" name="date" onChange={this.inputChanged} ref="newDate" /></td>
+              <td><input type="text" name="description" placeholder="Cannot be empty" onChange={this.inputChanged} ref="newDescription" /></td>
+              <td><input type="button" value="Add new todo" onClick={this.addTodo} className="button"/></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }
@@ -53,7 +51,11 @@ class Add extends Component {
     this.refs.newDate.value = "";
     this.refs.newDescription.value = "";
 
-    this.props.stateUpdate(updatedTodoList);
+    if(this.state.todo.date!="" && this.state.todo.description!=""){
+      this.props.stateUpdate(updatedTodoList);
+    }else{
+    alert("Adding fields cannot be empty!");
+    }
 
   }
 }

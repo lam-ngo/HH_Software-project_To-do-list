@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-//import components: Search, Table, Add
-import Search from './Component_Search/Search';
+//import components: Table, Add
 import Table from './Component_Table/Table';
 import Add from './Component_Add/Add';
 
