@@ -5,56 +5,58 @@ class Add extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todo: {date: '', description: ''},
-      todoList: this.props.todoList
+      date: '',
+      description: '',
     }
-    this.inputChanged = this.inputChanged.bind(this);
+  }
 
+  componentWillMount = () => {
+    console.log(this.state.todoList);
   }
 
   render() {
     return (
       <div className="container">
-        <form onSubmit={this.addTodo}>
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th></th>
-              </tr>
-            </thead>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+          </thead>
 
-            <tbody>
-              <tr>
-                <td><input type="text" name="date" placeholder="dd.MM.yyyy" onChange={this.inputChanged} ref="newDate" /></td>
-                <td><input type="text" name="description" placeholder="Cannot be empty" onChange={this.inputChanged} ref="newDescription" /></td>
-                <td><input type="submit" value="Add new todo" className="button"/></td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
+          <tbody>
+            <tr>
+              <td><input type="date" name="date" value={this.state.date} onChange={this.inputChanged} /></td>
+              <td><input type="text" name="description" value={this.state.description} onChange={this.inputChanged} /></td>
+              <td><input type="button" value="Add new todo" className="button" onClick={this.addTodo}/></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }
 
   //inputChanged handle input change when user input new todo
   inputChanged = (event) => {
-    const newTodo = this.state.todo;
-    newTodo[event.target.name]= event.target.value;
-    this.setState({todo: newTodo});
+    this.setState({[event.target.name]: event.target.value});
   }
 
   // addTodo handle adding the new todo to current todoList
-  addTodo = (event) => {
-    event.preventDefault();
-    let updatedTodoList = [...this.state.todoList, this.state.todo];
+  addTodo = () => {
 
-    this.refs.newDate.value = "";
-    this.refs.newDescription.value = "";
 
-    this.props.stateUpdate(updatedTodoList);
 
+    if(this.state.date!==""&&this.state.description!==""){
+      let newTodo = {
+        date: this.state.date,
+        description: this.state.description,
+      };
+      this.props.stateUpdate(newTodo);
+    }else{
+      alert("Fields cannot be empty!");
+    }
   }
 }
 
